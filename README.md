@@ -4,4 +4,12 @@ Utility to get a uniform description of the latest recommendations from [OnePape
 
 Useful for automatically downloading the papers or setting up a notification system.
 
-Tested under Python 3.3.
+## Dependencies
+
+ * [python-twitter](http://code.google.com/p/python-twitter/)
+ * [Requests](http://docs.python-requests.org/en/latest/)
+ * [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
+
+## Runtime Version
+
+Tested under Python 2.7.
