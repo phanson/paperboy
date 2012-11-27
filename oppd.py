@@ -2,6 +2,8 @@ import twitter
 import requests
 import re
 import itertools
+from urlparse import urlparse
+import urllib
 
 _tag_pattern = '(?:(?<=\s)|^)#(\w*[A-Za-z0-9_\-]+\w*)'
 _url_pattern = '(http://[a-zA-Z0-9_\-\%\./]+)'
@@ -14,7 +16,10 @@ class Paper:
 		self.tags = tags
 		self.link = link
 		self.link_type = link_type
-		self.title = title
+		if title:
+			self.title = title.strip()
+		else:
+			self.title = urllib.unquote_plus('.'.join(urlparse(link).path.split('/')[-1].split('.')[:-1])).strip()
 
 def unshorten(url):
 	r = requests.head(url)
@@ -37,5 +42,5 @@ def get_papers():
 		urls = re.findall(_url_pattern, text)
 		titles = re.findall(_title_pattern, text)
 		for link in itertools.izip_longest(map(unshorten, urls), titles):
-			papers.append(Paper(s.id, text, tags, link[0][0], link[0][1], link[1]))
+			papers.append(Paper(s.id, text, tags, link[0][0], link[0][1].split(';')[0], link[1]))
 	return papers

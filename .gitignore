@@ -30,5 +30,5 @@ nosetests.xml
 *.mo
 
 # Data files
-.csv
+*.csv
 
