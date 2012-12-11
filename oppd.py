@@ -9,6 +9,7 @@ _tag_pattern = '(?:(?<=\s)|^)#(\w*[A-Za-z0-9_\-]+\w*)'
 _url_pattern = '(http://[a-zA-Z0-9_\-\%\./]+)'
 _title_pattern = '"(.+)"'
 
+
 class Paper:
 	def __init__(self, id, text, tags, link, link_type, title):
 		self.id = 0
@@ -21,6 +22,7 @@ class Paper:
 		else:
 			self.title = urllib.unquote_plus('.'.join(urlparse(link).path.split('/')[-1].split('.')[:-1])).strip()
 
+
 def unshorten(url):
 	r = requests.head(url)
 	if not r.ok:
@@ -31,6 +33,7 @@ def unshorten(url):
 		if not r.ok:
 			raise Exception('Problem shortening URL')
 	return (r.url, r.headers['content-type'])
+
 
 def get_papers():
 	api = twitter.Api()
