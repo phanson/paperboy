@@ -31,7 +31,7 @@ def unshorten(url):
 		url = r.headers['location']
 		r = requests.head(url)
 		if not r.ok:
-			raise Exception('Problem shortening URL')
+			return (url, '')
 	return (r.url, r.headers['content-type'])
 
 
