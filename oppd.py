@@ -12,7 +12,7 @@ _title_pattern = '"(.+)"'
 
 class Paper:
 	def __init__(self, id, text, tags, link, link_type, title):
-		self.id = 0
+		self.id = id
 		self.orig_tweet = text
 		self.tags = tags
 		self.link = link
