@@ -29,7 +29,10 @@ def unshorten(url):
 		raise Exception('Problem shortening URL')
 	while r.status_code / 100 == 3:  # 300 series redirect from shortener
 		url = r.headers['location']
-		r = requests.head(url)
+		try:
+			r = requests.head(url)
+		except ConnectionError:
+			return (url, '')
 		if not r.ok:
 			return (url, '')
 	return (r.url, r.headers['content-type'])
