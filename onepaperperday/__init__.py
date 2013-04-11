@@ -26,12 +26,12 @@ class Paper:
 def unshorten(url):
 	r = requests.head(url)
 	if not r.ok:
-		raise Exception('Problem shortening URL')
+		return (url, '')
 	while r.status_code / 100 == 3:  # 300 series redirect from shortener
 		url = r.headers['location']
 		try:
 			r = requests.head(url)
-		except ConnectionError:
+		except:
 			return (url, '')
 		if not r.ok:
 			return (url, '')
