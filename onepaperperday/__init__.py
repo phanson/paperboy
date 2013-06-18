@@ -38,9 +38,9 @@ def unshorten(url):
 	return (r.url, r.headers['content-type'])
 
 
-def get_papers():
-	api = twitter.Api()
-	statuses = api.GetUserTimeline('onepaperperday')
+def get_papers(keys):
+	api = twitter.Api(**keys)
+	statuses = api.GetUserTimeline(screen_name='onepaperperday')
 	papers = []
 	for s in statuses:
 		text = s.text
