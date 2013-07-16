@@ -6,7 +6,7 @@ from urlparse import urlparse
 import urllib
 
 _tag_pattern = '(?:(?<=\s)|^)#(\w*[A-Za-z0-9_\-]+\w*)'
-_url_pattern = '(http://[a-zA-Z0-9_\-\%\./]+)'
+_url_pattern = '(https?://[a-zA-Z0-9_\-\%\./]+)'
 _title_pattern = '"(.+)"'
 
 
@@ -48,5 +48,6 @@ def get_papers(keys):
 		urls = re.findall(_url_pattern, text)
 		titles = re.findall(_title_pattern, text)
 		for link in itertools.izip_longest(map(unshorten, urls), titles):
-			papers.append(Paper(s.id, text, tags, link[0][0], link[0][1].split(';')[0], link[1]))
+			if link[0] is not None:
+				papers.append(Paper(s.id, text, tags, link[0][0], link[0][1].split(';')[0], link[1]))
 	return papers
