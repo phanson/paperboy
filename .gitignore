@@ -30,7 +30,14 @@ nosetests.xml
 # Translations
 *.mo
 
+# Virtualenv
+include/
+local/
+
 # Data files
 *.csv
 *.htm
+
+# Temp files
+*~
 
