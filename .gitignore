@@ -1,5 +1,6 @@
 *.py[cod]
 app_authorization.py
+email_settings.py
 
 # C extensions
 *.so
